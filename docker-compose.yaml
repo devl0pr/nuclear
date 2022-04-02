@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+    nuke_nginx:
+        container_name: nuke_nginx
+        restart: always
+        image: nginx:alpine
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./backend:/var/www/backend
+            - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - nuke_php
+
+    nuke_php:
+        container_name: nuke_app
+        restart: always
+        build:
+            dockerfile: ./php-fpm/Dockerfile
+            context: .
+        ports:
+            - "9000:9000"
+        volumes:
+            - ./backend:/var/www/backend
+
+    nuke_postgres:
+        container_name: nuke_postgres
+        image: postgres:14.2-alpine
+        restart: always
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+        ports:
+            - "5432:5432"
+        volumes:
+            - pgdb:/var/lib/postgresql/data
+
+    nuke_adminer:
+        container_name: nuke_adminer
+        image: adminer
+        restart: always
+        ports:
+            - "8080:8080"
+
+volumes:
+    pgdb: {}
