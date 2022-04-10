@@ -9,7 +9,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <p>HELLO </p>
+        <p>This is coming from docker container automaticly </p>
         <a
           className="App-link"
           href="https://reactjs.org"

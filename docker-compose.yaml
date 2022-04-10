@@ -44,6 +44,7 @@ services:
 
     nuke_react:
         container_name: nuke_react
+        restart: always
         build:
             dockerfile: ./frontend/Dockerfile
             context: .

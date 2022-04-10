@@ -5,9 +5,12 @@ namespace App\Entity\Auth;
 use App\Repository\Auth\PersonRepository;
 use App\Traits\Entity\Timestampable;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: PersonRepository::class)]
-class Person
+#[ORM\Table(name: 'person', schema: 'auth')]
+class Person implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use Timestampable;
 
@@ -133,5 +136,20 @@ class Person
     public function setIsActive(bool $isActive): void
     {
         $this->isActive = $isActive;
+    }
+
+    public function getRoles(): array
+    {
+        // TODO: Implement getRoles() method.
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getUserIdentifier(): string
+    {
+        // TODO: Implement getUserIdentifier() method.
     }
 }
