@@ -9,9 +9,9 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: PersonRepository::class)]
-#[ORM\Table(name: 'person', schema: 'auth')]
+#[ORM\Table(name: 'person_tmp', schema: 'auth')]
 #[ORM\HasLifecycleCallbacks]
-class Person implements UserInterface, PasswordAuthenticatedUserInterface
+class PersonTmp implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use Timestampable;
 

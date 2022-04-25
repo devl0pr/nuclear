@@ -15,7 +15,16 @@ class Date
         return $datetime;
     }
 
-    public static function convertStringToUTCDateTime(?string $dateTimeStr, $timeZone): ?\DateTime
+    public static function getDateTimeImmutable()
+    {
+        $datetimeImmutable = new \DateTimeImmutable();
+        $datetimeImmutable->setTimezone(new \DateTimeZone("UTC"));
+
+
+        return $datetimeImmutable;
+    }
+
+    public static function convertStringToUTCDateTime(?string $dateTimeStr, $timeZone): ?\DateTimeImmutable
     {
         if (!(is_string($timeZone) || $timeZone instanceof \DateTimeZone)) {
             throw new \InvalidArgumentException();
@@ -31,7 +40,7 @@ class Date
                     $timeZone = new \DateTimeZone($timeZone);
                 }
 
-                $dateTime = new \DateTime($dateTimeStr, $timeZone);
+                $dateTime = new \DateTimeImmutable($dateTimeStr, $timeZone);
                 $dateTime->setTimezone(new \DateTimeZone('UTC'));
 
                 return $dateTime;

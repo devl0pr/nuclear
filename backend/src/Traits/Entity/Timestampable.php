@@ -42,10 +42,10 @@ trait Timestampable
     }
 
     #[ORM\PrePersist]
-    public function setCreatedAt(?\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(): self
     {
         $this->isDeleted = false;
-        $this->createdAt = Date::getModifiedDateTime();
+        $this->createdAt = Date::getDateTimeImmutable();
 
         return $this;
     }
@@ -70,7 +70,7 @@ trait Timestampable
     #[ORM\PreUpdate]
     public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
     {
-        $this->updatedAt = Date::getModifiedDateTime();
+        $this->updatedAt = Date::getDateTimeImmutable();
 
         return $this;
     }
