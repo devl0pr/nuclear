@@ -19,7 +19,7 @@ services:
         container_name: nuke_app
         restart: always
         build:
-            dockerfile: ./php-fpm/Dockerfile
+            dockerfile: Dockerfile
             context: .
         ports:
             - "9000:9000"
@@ -39,21 +39,6 @@ services:
             - "5432:5432"
         volumes:
             - pgdb:/var/lib/postgresql/data
-        networks:
-            - nuke
-
-    nuke_react:
-        container_name: nuke_react
-        restart: always
-        build:
-            dockerfile: ./frontend/Dockerfile
-            context: .
-        volumes:
-        - './frontend/src:/var/www/frontend/src'
-        ports:
-        - 3000:3000
-        environment:
-        - CHOKIDAR_USEPOLLING=true
         networks:
             - nuke
 
